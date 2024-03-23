@@ -1,3 +1,15 @@
+
+For running agent without delay:
+```sh
+python train.py id=HalfCheetah-v2 seed=1 wandb_log=True wandb_run_name=test seq_len=3 delay_actions=False
+```
+
+For running agent with delay:
+```sh
+python train.py id=HalfCheetah-v2 seed=1 wandb_log=True wandb_run_name=test_delay seq_len=3 delay_actions=True
+```
+
+
 # Aligned Latent Models (ALMs)
 [Raj Ghugare](https://rajghugare19.github.io/), [Homanga Bharadhwaj](https://homangab.github.io/), [Benjamin Eysenbach](https://ben-eysenbach.github.io/), [Sergey Levine](https://people.eecs.berkeley.edu/~svlevine/), and [Ruslan Salakhutdinov](https://www.cs.cmu.edu/~rsalakhu/). 
 
