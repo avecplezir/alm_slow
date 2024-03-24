@@ -80,23 +80,6 @@ class AlmAgent(object):
         
         return z.cpu().numpy()
 
-    def _rollout_evaluation(self, z_batch, action_batch, std):
-        z_seq = [z_batch]
-        action_seq = [action_batch]
-        with torch.no_grad():
-            for t in range(self.seq_len):
-                z_batch = self.model(z_batch, action_batch).sample()
-
-                action_dist = self.actor(z_batch.detach(), std)
-                action_batch = action_dist.mean
-                
-                z_seq.append(z_batch)
-                action_seq.append(action_batch)
-
-        z_seq = torch.stack(z_seq, dim=0)
-        action_seq = torch.stack(action_seq, dim=0)
-        return z_seq, action_seq
-
     def update(self, step):
         metrics = dict()
         std = utils.linear_schedule(self.expl_start, self.expl_end, self.expl_duration, step)
