@@ -137,8 +137,12 @@ class Actor(nn.Module):
     def delay_forward(self, x, std, hidden_activations):
         new_hidden_activations = []
         x = F.elu(self.fc1(x))
+        x.data = x / 3
+        x = x * 3
         new_hidden_activations.append(x)
         x = F.elu(self.fc2(hidden_activations[0]))
+        x.data = x / 2
+        x = x * 2
         new_hidden_activations.append(x)
         mean = torch.tanh(self.mean(hidden_activations[1]))
         std = torch.ones_like(mean) * std
