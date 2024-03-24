@@ -143,4 +143,4 @@ class Actor(nn.Module):
         mean = torch.tanh(self.mean(hidden_activations[1]))
         std = torch.ones_like(mean) * std
         dist = utils.TruncatedNormal(mean, std, self.low, self.high)
-        return dist, hidden_activations
+        return dist, new_hidden_activations
